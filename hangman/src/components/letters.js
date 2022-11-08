@@ -6,6 +6,9 @@ class Letters extends Component {
 		super()
 		this.state = {}
 	}
+	selectLetter = (letter) => {
+		this.props.selectLetter(letter)
+	}
 
 	render() {
 		let letters = this.props.letterStatus
@@ -13,8 +16,13 @@ class Letters extends Component {
 		return (
 			<div>
 				<div>Available Letters:</div>
-				{Object.keys(letters).map((l) => (
-					<Letter letter={l} available={letters[l]}></Letter>
+				{Object.keys(letters).map((l, v) => (
+					<Letter
+						key={v}
+						letter={l}
+						chosen={letters[l]}
+						selectLetter={this.selectLetter}
+					></Letter>
 				))}
 			</div>
 		)

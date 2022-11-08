@@ -1,19 +1,38 @@
 import React, { Component } from "react"
+import Letter from "./letter"
 
 class Solution extends Component {
 	constructor() {
 		super()
-		this.state = {
-			letters: ["_", "_", "_", "_"],
-		}
 	}
 
 	render() {
+		let chosenLetters = this.props.letterStatus
+		let solutionHint = this.props.solution.hint.split("")
+		let solutionWord = this.props.solution.word.split("")
+
 		return (
 			<div>
-				{this.state.letters.map((l) => (
-					<span>{l}</span>
-				))}
+				<div>
+					Hint:{" "}
+					{solutionHint.map((l, j) => (
+						<Letter key={j} letter={l} chosen={false}></Letter>
+					))}
+				</div>
+				<div>
+					Solution:{" "}
+					{solutionWord.map((l, j) =>
+						chosenLetters[l] ? (
+							<Letter key={j} letter={l} chosen={false}></Letter>
+						) : (
+							<Letter
+								key={j}
+								letter={"_"}
+								chosen={false}
+							></Letter>
+						)
+					)}
+				</div>
 			</div>
 		)
 	}
